@@ -22,7 +22,7 @@ Let's omit na from the data. Then we group the data per date and take the sum of
 ```r
 x <- na.omit(data)
 aggregate <- aggregate(steps ~ date, data = x, sum)
-hist(aggregate$steps, breaks = 20, col = "red", xlab = "Mean number of steps per day", main = "Mean number of steps per day")
+hist(aggregate$steps, breaks = 25, col = "red", xlab = "Mean number of steps per day", main = "Mean number of steps per day")
 ```
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
@@ -42,7 +42,7 @@ median(aggregate$steps)
 ```
 ## [1] 10765
 ```
-
+The mean is 10766.19 and the median is 10765.
 
 
 ## What is the average daily activity pattern?
@@ -61,6 +61,11 @@ We find the index of the max value for number of steps.
 
 ```r
 index <- which.max(completeAggregate$steps)
+index
+```
+
+```
+## [1] 104
 ```
 
 #### Get interval for max
@@ -68,14 +73,26 @@ We use the index to get the interval that corresponds to the max value.
 
 ```r
 maxinterval <- completeAggregate$interval[index]
+maxinterval
 ```
+
+```
+## [1] 835
+```
+The interval with the max value of average number of steps is interval 835.
 
 #### Imputing missing values
 We get the total number of na's in the data.
 
 ```r
 na <- sum(is.na(data))
+na
 ```
+
+```
+## [1] 2304
+```
+There are 2304 NA in the data set.
 
 Let's impute the missing data with the mean for that interval.
 First we define a function to replace the missing data with the mean.
@@ -110,7 +127,8 @@ median(imputeAggregate$steps)
 ```
 ## [1] 10766.19
 ```
-
+The mean is 10766.19 and the median is 10766.19 for the imputed data.
+We can see that there is no difference in the mean or median as compared to the original data when using impute by mean value.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 

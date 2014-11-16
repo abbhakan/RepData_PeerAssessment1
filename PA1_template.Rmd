@@ -29,7 +29,7 @@ hist(aggregate$steps, breaks = 20, col = "red", xlab = "Mean number of steps per
 mean(aggregate$steps)
 median(aggregate$steps)
 ```
-
+The mean is 10766.19 and the median is 10765.
 
 
 ## What is the average daily activity pattern?
@@ -44,19 +44,24 @@ plot(completeAggregate$interval, completeAggregate$steps, type = "l", col = "Bla
 We find the index of the max value for number of steps.
 ```{r}
 index <- which.max(completeAggregate$steps)
+index
 ```
 
 #### Get interval for max
 We use the index to get the interval that corresponds to the max value.
 ```{r}
 maxinterval <- completeAggregate$interval[index]
+maxinterval
 ```
+The interval with the max value of average number of steps is interval 835.
 
 #### Imputing missing values
 We get the total number of na's in the data.
 ```{r}
 na <- sum(is.na(data))
+na
 ```
+There are 2304 NA in the data set.
 
 Let's impute the missing data with the mean for that interval.
 First we define a function to replace the missing data with the mean.
@@ -74,7 +79,8 @@ hist(imputeAggregate$steps, breaks = 20, col = "red", xlab = "Mean number of ste
 mean(imputeAggregate$steps)
 median(imputeAggregate$steps)
 ```
-
+The mean is 10766.19 and the median is 10766.19 for the imputed data.
+We can see that there is no difference in the mean or median as compared to the original data when using impute by mean value.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
